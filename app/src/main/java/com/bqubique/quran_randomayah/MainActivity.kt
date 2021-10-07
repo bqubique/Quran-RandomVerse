@@ -3,26 +3,29 @@ package com.bqubique.quran_randomayah
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bqubique.quran_randomayah.api.QuranApi
 import com.bqubique.quran_randomayah.databinding.ActivityMainBinding
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
+import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity  : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
 
     @Inject
     lateinit var quranApi: QuranApi
 
     private lateinit var arabicAyah: ArabicAyah
     private lateinit var englishAyah: Ayah
+    private lateinit var ayahViewModel: AyahViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +36,24 @@ class MainActivity  : ComponentActivity() {
         englishAyah = getRandomAyah()
         arabicAyah = getArabicAyah(englishAyah.verse.verseKey)
 
-        binding.tvVerseKey.text = arabicAyah.verses[0].verseKey
-        binding.tvArabic.text = arabicAyah.verses[0].textUthmani
-        binding.tvEnglish.text = englishAyah.verse.translations[0].text
+        ayahViewModel = ViewModelProvider(this).get(AyahViewModel::class.java)
+        getVerses()
+
+        binding.refreshFab.setOnClickListener{
+            getVerses()
+        }
+    }
+
+    private fun getVerses() {
+        ayahViewModel.refresh()
+        ayahViewModel.englishVerse.observe(this, Observer {verse->
+            binding.tvEnglish.text = verse.verse.translations[0].text
+        })
+
+        ayahViewModel.arabicVerse.observe(this, Observer {verse->
+            binding.tvArabic.text = verse.verses[0].textUthmani
+            binding.tvVerseKey.text = verse.verses[0].verseKey
+        })
 
     }
 
@@ -47,8 +65,6 @@ class MainActivity  : ComponentActivity() {
                 Log.d("MAIN ACT", randomAyah.verse.verseKey)
             }.join()
         }
-
-
         return randomAyah
     }
 
