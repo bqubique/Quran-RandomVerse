@@ -8,12 +8,84 @@
     tools:context=".MainActivity"
     tools:deviceIds="wear"
     android:fitsSystemWindows="true">
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        android:scrollbars="vertical"
+
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/dark_bg"
+            tools:context=".view.RandomAyah"
+            android:paddingHorizontal="20dp">
+
+            <TextView
+                android:id="@+id/tv_verseKey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="20:83"
+                android:textColor="@color/aqua_txt"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_arabic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/cairo_semibold"
+                android:text="AR"
+                android:textAlignment="center"
+                android:textColor="@color/blue_txt"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_verseKey" />
+
+            <TextView
+                android:id="@+id/tv_english"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="EN"
+                android:textAlignment="center"
+                android:textColor="@color/aqua_txt"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_arabic" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/refresh_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="8dp"
+                android:backgroundTint="@color/blue_txt"
+                android:contentDescription="Refresh"
+                android:elevation="0dp"
+                app:borderWidth="0dp"
+                app:fabCustomSize="27dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_english"
+                app:rippleColor="@color/aqua_txt"
+                app:srcCompat="@drawable/ic_baseline_refresh_24" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
 </androidx.wear.widget.BoxInsetLayout>
