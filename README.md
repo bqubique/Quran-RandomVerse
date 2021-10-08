@@ -16,6 +16,7 @@ Project has been built using Kotlin and Android Jetpack libraries. Retrofit has 
  - [ ] Support for other translations
  - [ ] Always on display support
  - [ ] Watch face support (?)
+ - [ ] Create app icon
 
 ## Screenshots
 ![Tiles API Support](https://i.imgur.com/wBH9kHX.png)
