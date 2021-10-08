@@ -1,6 +1,6 @@
 # Welcome to Quran Random Verse!
 
-This is a sample project of random verse from the noble Quran. This application supports Wear OS 2.X and newer devices and has Wear OS Tiles support too.
+This is a sample project of random verse from the noble Quran. This application supports devices with Wear OS 2.X and newer and has Wear OS Tiles support.
 
 ## Project
 
