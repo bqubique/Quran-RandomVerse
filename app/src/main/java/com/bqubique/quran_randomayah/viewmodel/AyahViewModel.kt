@@ -1,6 +1,5 @@
 package com.bqubique.quran_randomayah.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bqubique.quran_randomayah.api.QuranApi
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AyahViewModel @Inject constructor(
-    val quranApi: QuranApi
+    private val quranApi: QuranApi
 ) : ViewModel() {
 
     var englishVerse = MutableLiveData<Ayah>()
@@ -32,6 +31,7 @@ class AyahViewModel @Inject constructor(
         lateinit var arabicVerseResponse: ArabicAyah
         lateinit var englishVerseResponse: Ayah
 
+        loading.value = true
         runBlocking {
             CoroutineScope(Dispatchers.IO).launch {
                 englishVerseResponse = quranApi.getRandomAyah()
@@ -40,7 +40,6 @@ class AyahViewModel @Inject constructor(
         }
 
         arabicVerseResponse.let {
-            Log.d("VIEWMODEL", it.toString())
             loading.value = false
             error.value = false
             arabicVerse.value = it

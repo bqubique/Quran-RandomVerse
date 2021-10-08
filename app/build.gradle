@@ -59,4 +59,15 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
 
 
+    implementation("androidx.wear.tiles:tiles:1.0.0-alpha12")
+
+    debugImplementation("androidx.wear.tiles:tiles-renderer:1.0.0-alpha12")
+
+    implementation("androidx.concurrent:concurrent-futures:1.1.0")
+
+    implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.1")
+
+
+
 }

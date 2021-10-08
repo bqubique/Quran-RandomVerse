@@ -5,8 +5,6 @@ import com.bqubique.quran_randomayah.api.QuranApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,7 +15,6 @@ import javax.inject.Singleton
 object Module {
     private const val QURAN_BASE_URL = "https://api.quran.com"
     private const val IMG_BASE_URL = "https://api.unsplash.com"
-
 
     @Provides
     @Singleton
