@@ -20,7 +20,7 @@ Project has been built using Kotlin and Android Jetpack libraries. Retrofit has 
 
 ## Screenshots
 ![Tiles API Support](https://i.imgur.com/wBH9kHX.png)
-![App Screenshot](https://i.imgur.com/Vgo7HoN.png)
+![App Screenshot](https://i.imgur.com/GBkOnyr.png)
 
 
 ## Contributing
