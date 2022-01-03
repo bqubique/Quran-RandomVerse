@@ -1,54 +1,52 @@
 package com.bqubique.quran_randomayah.view
 
-import android.opengl.Visibility
 import android.os.Bundle
-import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.lifecycle.ViewModelProvider
-import com.bqubique.quran_randomayah.api.QuranApi
-import com.bqubique.quran_randomayah.databinding.ActivityMainBinding
-import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.compose.material.AppCard
+import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.ScalingLazyColumn
+import androidx.wear.compose.material.Text
+import com.bqubique.quran_randomayah.R
+import com.bqubique.quran_randomayah.theme.WearAppTheme
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    private lateinit var binding: ActivityMainBinding
-
-    @Inject
-    lateinit var quranApi: QuranApi
-
-    private lateinit var ayahViewModel: AyahViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        ayahViewModel = ViewModelProvider(this).get(AyahViewModel::class.java)
-        getVerses()
-
-        binding.refreshFab.setOnClickListener{
-            getVerses()
+        setContent {
+            WearApp()
         }
     }
+}
 
-    private fun getVerses() {
-        ayahViewModel.refresh()
-
-        ayahViewModel.loading.observe(this, {loading->
-            if (loading!!) binding.progressBar.visibility = View.VISIBLE else binding.progressBar.visibility = View.GONE
-        })
-
-        ayahViewModel.englishVerse.observe(this, {verse->
-            binding.tvEnglish.text = verse.verse.translations[0].text
-        })
-
-        ayahViewModel.arabicVerse.observe(this,  {verse->
-            binding.tvArabic.text = verse.verses[0].textUthmani
-            binding.tvVerseKey.text = verse.verses[0].verseKey
-        })
+@Composable
+fun WearApp() {
+    WearAppTheme {
+        ScalingLazyColumn() {
+            item {
+                AppCard(
+                    onClick = { /*TODO*/ },
+                    appName = { Text("Hello") },
+                    time = { },
+                    title = { Text("Whatever") }) {
+                }
+            }
+        }
     }
+}
+
+@Preview
+@Composable
+fun DefaultPreview() {
+    WearApp()
 }
