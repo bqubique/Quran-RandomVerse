@@ -1,5 +1,7 @@
 package com.bqubique.quran_randomayah.viewmodel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bqubique.quran_randomayah.api.QuranApi
@@ -12,44 +14,52 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
+const val TAG = "AyahViewModel"
+
 @HiltViewModel
 class AyahViewModel @Inject constructor(
     private val quranApi: QuranApi
 ) : ViewModel() {
 
-    var englishVerse = MutableLiveData<Ayah>()
-    var arabicVerse = MutableLiveData<ArabicAyah>()
-    var loading = MutableLiveData<Boolean>()
+    private var _englishVerse = MutableLiveData<Ayah>()
+    var englishVerse: LiveData<Ayah> = _englishVerse
+    private var _arabicVerse = MutableLiveData<ArabicAyah>()
+    var arabicVerse: LiveData<ArabicAyah> = _arabicVerse
+
+    private var _loading = MutableLiveData<Boolean>()
+    var loading: LiveData<Boolean> = _loading
+
     var error = MutableLiveData<Boolean>()
 
-    fun refresh() {
-        loading.value = true
+    init {
         getVerse()
     }
 
-    private fun getVerse() {
+    fun getVerse() {
         lateinit var arabicVerseResponse: ArabicAyah
         lateinit var englishVerseResponse: Ayah
 
-        loading.value = true
+        _loading.value = true
+
         runBlocking {
             CoroutineScope(Dispatchers.IO).launch {
                 englishVerseResponse = quranApi.getRandomAyah()
                 arabicVerseResponse = quranApi.getArabicAyah(englishVerseResponse.verse.verseKey)
             }.join()
+
+            _loading.value = false
         }
 
         arabicVerseResponse.let {
-            loading.value = false
+            this._loading.value = false
             error.value = false
-            arabicVerse.value = it
+            _arabicVerse.value = it
         }
 
         englishVerseResponse.let {
-            loading.value = false
+            this._loading.value = false
             error.value = false
-            englishVerse.value = it
+            _englishVerse.value = it
         }
-
     }
 }
