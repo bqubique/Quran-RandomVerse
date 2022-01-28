@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Quran-RandomAyah</string>
+    <string name="app_name">Quran Random Verse</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
-    <string name="hello_world">Hello Square World!</string>
+    <string name="hello_world">Square</string>
 </resources>

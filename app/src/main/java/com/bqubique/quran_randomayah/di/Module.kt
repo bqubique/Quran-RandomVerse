@@ -1,6 +1,5 @@
 package com.bqubique.quran_randomayah.di
 
-import com.bqubique.quran_randomayah.api.BackgroundApi
 import com.bqubique.quran_randomayah.api.QuranApi
 import dagger.Module
 import dagger.Provides
@@ -24,15 +23,5 @@ object Module {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(QuranApi::class.java)
-    }
-
-    @Provides
-    @Singleton
-    fun provideBackgroundImageApi() : BackgroundApi{
-        return Retrofit.Builder()
-            .baseUrl(IMG_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(BackgroundApi::class.java)
     }
 }

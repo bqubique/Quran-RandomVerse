@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class QuranTile : androidx.wear.tiles.TileService() {
     private val serviceJob = Job()
@@ -59,20 +60,20 @@ class QuranTile : androidx.wear.tiles.TileService() {
                         LayoutElementBuilders.Text.Builder()
                             .setText(ayah)
                             .setMaxLines(10)
-                            .setFontStyle(LayoutElementBuilders.FontStyles.display2(deviceParameters).build())
+                            .setFontStyle(
+                                LayoutElementBuilders.FontStyles.caption1(deviceParameters).build()
+                            )
                             .build()
                     )
                     .build()
-            )
+            ).build()
 
-            .build()
-
-    private fun getVerse() : String{
+    private fun getVerse(): String {
         lateinit var englishVerseResponse: Ayah
 
         runBlocking {
             CoroutineScope(Dispatchers.IO).launch {
-                englishVerseResponse = quranApi.getRandomAyah()
+                englishVerseResponse = quranApi.getRandomAyah().body()!!
             }.join()
         }
         return englishVerseResponse.verse.translations[0].text

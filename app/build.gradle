@@ -76,5 +76,7 @@ dependencies {
     //Material icons
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
+    //Glance Tiles
+    implementation "androidx.glance:glance-wear-tiles:1.0.0-alpha02"
 
 }
