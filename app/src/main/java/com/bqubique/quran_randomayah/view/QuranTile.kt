@@ -1,81 +1,40 @@
 package com.bqubique.quran_randomayah.view
 
+import android.annotation.SuppressLint
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.glance.wear.tiles.GlanceTileService
 import androidx.wear.tiles.*
-import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.guava.future
-import com.bqubique.quran_randomayah.api.QuranApi
-import com.bqubique.quran_randomayah.model.ArabicAyah
-import com.bqubique.quran_randomayah.model.Ayah
-import com.google.common.util.concurrent.Futures
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import androidx.glance.GlanceModifier
+import androidx.glance.Image
+import androidx.glance.ImageProvider
+import androidx.glance.layout.*
+import androidx.glance.text.Text
+import androidx.glance.text.TextStyle
+import androidx.glance.unit.ColorProvider
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.bqubique.quran_randomayah.R
+import com.bqubique.quran_randomayah.api.QuranApi
+import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
 import javax.inject.Inject
 
-
-@AndroidEntryPoint
-class QuranTile : androidx.wear.tiles.TileService() {
-    private val serviceJob = Job()
-    private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
-
-    @Inject
-    lateinit var quranApi: QuranApi
-
-    override fun onTileRequest(
-        requestParams: RequestBuilders.TileRequest
-    ): ListenableFuture<TileBuilders.Tile> = serviceScope.future {
-
-        TileBuilders.Tile.Builder()
-            .setResourcesVersion("1")
-            // Creates a timeline to hold one or more tile entries for a specific time periods.
-            .setTimeline(
-                TimelineBuilders.Timeline.Builder()
-                    .addTimelineEntry(
-                        TimelineBuilders.TimelineEntry.Builder()
-                            .setLayout(
-                                LayoutElementBuilders.Layout.Builder()
-                                    .setRoot(
-                                        layout(getVerse(), requestParams.deviceParameters!!)
-                                    )
-                                    .build()
-                            )
-                            .build()
-                    )
-                    .build()
-            )
-            .build()
+class HelloTileService : GlanceTileService() {
+    @Composable
+    override fun Content() {
+        Tile()
     }
+}
 
-    override fun onResourcesRequest(
-        requestParams: RequestBuilders.ResourcesRequest
-    ): ListenableFuture<ResourceBuilders.Resources> = Futures.immediateFuture(
-        ResourceBuilders.Resources.Builder().setVersion("1").build()
-    )
+@Composable
+fun Tile (
+    ayahViewModel: AyahViewModel = hiltViewModel()
+) {
 
-
-    private fun layout(ayah: String, deviceParameters: DeviceParametersBuilders.DeviceParameters) =
-        LayoutElementBuilders.Box.Builder()
-            .addContent(
-                LayoutElementBuilders.Column.Builder()
-                    .addContent(
-                        LayoutElementBuilders.Text.Builder()
-                            .setText(ayah)
-                            .setMaxLines(10)
-                            .setFontStyle(
-                                LayoutElementBuilders.FontStyles.caption1(deviceParameters).build()
-                            )
-                            .build()
-                    )
-                    .build()
-            ).build()
-
-    private fun getVerse(): String {
-        lateinit var englishVerseResponse: Ayah
-
-        runBlocking {
-            CoroutineScope(Dispatchers.IO).launch {
-                englishVerseResponse = quranApi.getRandomAyah().body()!!
-            }.join()
-        }
-        return englishVerseResponse.verse.translations[0].text
-    }
 }
