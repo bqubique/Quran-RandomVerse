@@ -8,8 +8,6 @@ import com.bqubique.quran_randomayah.api.QuranApi
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Delay
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

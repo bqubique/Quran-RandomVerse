@@ -1,7 +1,5 @@
 package com.bqubique.quran_randomayah.view
 
-import android.content.Context
-import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -21,16 +19,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.glance.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.foundation.BasicCurvedText
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.material.*
-import com.bqubique.quran_randomayah.R
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 const val TAG = "VerseCard"
 
@@ -101,13 +96,16 @@ fun VerseCard(arabicVerse: State<ArabicAyah?>, englishVerse: State<Ayah?>) {
 
 @Composable
 fun ButtonRefresh(viewModel: AyahViewModel) {
-
-    Chip(
-        label = { Text("Refresh") },
-        icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
-        onClick = { viewModel.getVerse() },
-        modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
-    )
+    Box(contentAlignment = Alignment.Center) {
+        Chip(
+            label = { Text("Refresh") },
+            icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
+            onClick = {
+                viewModel.getVerse()
+            },
+            modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+        )
+    }
 }
 
 @Composable

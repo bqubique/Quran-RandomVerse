@@ -4,13 +4,11 @@ import androidx.wear.tiles.*
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.guava.future
 import com.bqubique.quran_randomayah.api.QuranApi
-import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import com.google.common.util.concurrent.Futures
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class QuranTile : androidx.wear.tiles.TileService() {
@@ -53,20 +51,43 @@ class QuranTile : androidx.wear.tiles.TileService() {
 
 
     private fun layout(ayah: String, deviceParameters: DeviceParametersBuilders.DeviceParameters) =
-        LayoutElementBuilders.Box.Builder()
+//        LayoutElementBuilders.Box.Builder()
+//            .setHeight(dp(24f))
+//            .setWidth(dp(24f))
+//            .setModifiers(
+//                ModifiersBuilders.Modifiers.Builder()
+//                    .setBackground(
+//                        ModifiersBuilders.Background.Builder()
+//                            .setColor(argb(0xFFFFFF)).build()
+//                    ).build()
+//            )
+//            .addContent(
+//                LayoutElementBuilders.Box.Builder()
+//                    .setWidth(expand())
+//                    .setHeight(expand())
+//                    .addContent(
+//                        LayoutElementBuilders.Image.Builder()
+//                            .setWidth(dp(24f))
+//                            .setHeight(dp(24f))
+//                            .setModifiers(
+//                                ModifiersBuilders.Modifiers.Builder()
+//                                    .setBackground(
+//                                        ModifiersBuilders.Background.Builder()
+//                                            .setColor(argb(0xFFFFFF)).build()
+//                                    ).build()
+//                            ).build()
+//                    ).build()
+        LayoutElementBuilders.Column.Builder()
             .addContent(
-                LayoutElementBuilders.Column.Builder()
-                    .addContent(
-                        LayoutElementBuilders.Text.Builder()
-                            .setText(ayah)
-                            .setMaxLines(10)
-                            .setFontStyle(
-                                LayoutElementBuilders.FontStyles.caption1(deviceParameters).build()
-                            )
-                            .build()
+                LayoutElementBuilders.Text.Builder()
+                    .setText(ayah)
+                    .setMaxLines(10)
+                    .setFontStyle(
+                        LayoutElementBuilders.FontStyles.caption1(deviceParameters).build()
                     )
                     .build()
-            ).build()
+            )
+            .build()
 
     private fun getVerse(): String {
         lateinit var englishVerseResponse: Ayah
