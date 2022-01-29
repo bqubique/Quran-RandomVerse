@@ -96,13 +96,16 @@ fun VerseCard(arabicVerse: State<ArabicAyah?>, englishVerse: State<Ayah?>) {
 
 @Composable
 fun ButtonRefresh(viewModel: AyahViewModel) {
-
-    Chip(
-        label = { Text("Refresh") },
-        icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
-        onClick = { viewModel.getVerse() },
-        modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
-    )
+    Box(contentAlignment = Alignment.Center) {
+        Chip(
+            label = { Text("Refresh") },
+            icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
+            onClick = {
+                viewModel.getVerse()
+            },
+            modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
+        )
+    }
 }
 
 @Composable

@@ -59,7 +59,7 @@ dependencies {
     //Coroutines
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2")
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
 
     //Compose
@@ -78,5 +78,8 @@ dependencies {
 
     //Glance Tiles
     implementation "androidx.glance:glance-wear-tiles:1.0.0-alpha02"
+
+    //Data layer
+    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
 
 }

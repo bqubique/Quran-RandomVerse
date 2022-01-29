@@ -13,27 +13,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
-
-<!--        <service-->
-<!--            android:name=".view.HelloTileService"-->
-<!--            android:description="@string/app_name"-->
-<!--            android:exported="true"-->
-<!--            android:label="Quran Tile"-->
-<!--            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
         <service
-            android:name=".view.HelloTileService"
-            android:description="@string/app_name"
+            android:name=".view.QuranTile"
+            android:description="@string/hello_world"
             android:exported="true"
-            android:label="@string/app_name"
+            android:label="Quran Random Verse"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
             <intent-filter>
                 <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
             </intent-filter>
+
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher_foreground" />
         </service>
+        <!--        <service-->
+        <!--            android:name=".view.HelloTileService"-->
+        <!--            android:description="@string/app_name"-->
+        <!--            android:exported="true"-->
+        <!--            android:label="@string/app_name"-->
+        <!--            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
 
         <uses-library
             android:name="com.google.android.wearable"
