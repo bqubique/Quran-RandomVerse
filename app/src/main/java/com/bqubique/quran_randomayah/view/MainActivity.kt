@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
             WearApp()
         }
     }
+
 }
 
 @OptIn(ExperimentalWearMaterialApi::class)
