@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CropSquare
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.twotone.CropSquare
 import androidx.compose.material.icons.twotone.MenuBook
