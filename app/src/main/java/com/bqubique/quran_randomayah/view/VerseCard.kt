@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CropSquare
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.twotone.CropSquare
 import androidx.compose.material.icons.twotone.MenuBook
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -79,7 +79,6 @@ fun VerseCardBody(
                 item { VerseCard(arabicVerse = arabicVerse, englishVerse = englishVerse) }
                 item { ButtonRefresh(viewModel = viewModel) }
                 item { ButtonTile() }
-//                item { ButtonShare(viewModel = viewModel) }
             }
         }
     } else {
@@ -122,31 +121,11 @@ fun ButtonTile() {
         val context = LocalContext.current
         Chip(
             label = { Text("Quran Tile") },
-            icon = { Icon(Icons.Default.CropSquare, contentDescription = "Quran Tile") },
+            icon = { Icon(Icons.TwoTone.CropSquare, contentDescription = "Quran Tile") },
             onClick = {
                 context.startActivity(Intent(context, TileRendererActivity::class.java))
             },
             modifier = Modifier.padding(top = 5.dp)
-        )
-    }
-}
-
-@Composable
-fun ButtonShare(viewModel: AyahViewModel) {
-    val context = LocalContext.current
-    Box(contentAlignment = Alignment.Center) {
-        Chip(
-            label = { Text("Share") },
-            icon = { Icon(Icons.Default.Share, contentDescription = "Refresh") },
-            onClick = {
-
-//                val s =
-//                    Wearable.getChannelClient(context).openChannel("a", "A").addOnSuccessListener {
-//                        Log.d(TAG, "ButtonShare: ${it.nodeId}")
-//                    }
-//                Log.d(TAG, "ButtonShare: ${s.result}")
-            },
-            modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
         )
     }
 }
