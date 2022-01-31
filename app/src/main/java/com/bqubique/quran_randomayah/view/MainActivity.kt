@@ -24,7 +24,6 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalWearMaterialApi::class)
 @Composable
-fun WearApp(
-) {
+fun WearApp() {
     WearAppTheme { VerseCardBody() }
 }

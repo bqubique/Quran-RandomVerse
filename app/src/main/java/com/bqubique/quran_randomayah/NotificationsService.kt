@@ -16,6 +16,7 @@ class NotificationsService : FirebaseMessagingService() {
     }
 
     override fun onDeletedMessages() {
+
         super.onDeletedMessages()
         Log.d(TAG, "onDeletedMessages: MESSAGE DELETED")
     }

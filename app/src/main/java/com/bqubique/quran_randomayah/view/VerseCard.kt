@@ -1,5 +1,6 @@
 package com.bqubique.quran_randomayah.view
 
+import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.twotone.MenuBook
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -19,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.glance.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.foundation.BasicCurvedText
 import androidx.wear.compose.foundation.CurvedTextStyle
@@ -26,6 +29,7 @@ import androidx.wear.compose.material.*
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
+import com.google.android.gms.wearable.Wearable
 
 const val TAG = "VerseCard"
 
@@ -70,6 +74,7 @@ fun VerseCardBody(
             ) {
                 item { VerseCard(arabicVerse = arabicVerse, englishVerse = englishVerse) }
                 item { ButtonRefresh(viewModel = viewModel) }
+//                item { ButtonShare(viewModel = viewModel) }
             }
         }
     } else {
@@ -100,8 +105,26 @@ fun ButtonRefresh(viewModel: AyahViewModel) {
         Chip(
             label = { Text("Refresh") },
             icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
+            onClick = { viewModel.getVerse() },
+            modifier = Modifier.padding(top = 5.dp, bottom = 10.dp)
+        )
+    }
+}
+
+@Composable
+fun ButtonShare(viewModel: AyahViewModel) {
+//    val context = LocalContext.current
+    Box(contentAlignment = Alignment.Center) {
+        Chip(
+            label = { Text("Share") },
+            icon = { Icon(Icons.Default.Share, contentDescription = "Refresh") },
             onClick = {
-                viewModel.getVerse()
+
+//                val s =
+//                    Wearable.getChannelClient(context).openChannel("a", "A").addOnSuccessListener {
+//                        Log.d(TAG, "ButtonShare: ${it.nodeId}")
+//                    }
+//                Log.d(TAG, "ButtonShare: ${s.result}")
             },
             modifier = Modifier.padding(top = 10.dp, bottom = 20.dp)
         )
