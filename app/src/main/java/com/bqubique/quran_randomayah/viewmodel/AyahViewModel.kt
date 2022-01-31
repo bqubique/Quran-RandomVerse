@@ -8,6 +8,7 @@ import com.bqubique.quran_randomayah.api.QuranApi
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,15 +28,16 @@ class AyahViewModel @Inject constructor(
     var loading: LiveData<Boolean> = _loading
 
     init {
-        getVerse()
+        getVerse(false)
     }
 
-    fun getVerse() {
+    fun getVerse(isTile: Boolean) {
         _loading.value = true
-
         viewModelScope.launch {
             _englishVerse.value = quranApi.getRandomAyah().body()
-            _arabicVerse.value = quranApi.getArabicAyah(_englishVerse.value!!.verse.verseKey).body()
+            _arabicVerse.value =
+                quranApi.getArabicAyah(_englishVerse.value!!.verse.verseKey).body()
+            delay(1500L)
             _loading.value = false
         }
     }

@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="dark_bg">#1B262C</color>
-    <color name="aqua_txt">#BBE1FA</color>
-    <color name="blue_txt">#3282B8</color>
     <color name="primary">#FFBB86FC</color>
-    <color name="primary50">#43ff646e</color>
 </resources>

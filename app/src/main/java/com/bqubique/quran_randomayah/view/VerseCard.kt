@@ -5,8 +5,10 @@ import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CropSquare
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.twotone.MenuBook
@@ -17,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -26,11 +29,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.foundation.BasicCurvedText
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.material.*
+import com.bqubique.quran_randomayah.R
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
 import com.bqubique.quran_randomayah.view.tile.TileRendererActivity
 import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
-import com.google.android.gms.wearable.Wearable
 
 const val TAG = "VerseCard"
 
@@ -107,7 +110,7 @@ fun ButtonRefresh(viewModel: AyahViewModel) {
         Chip(
             label = { Text("Refresh") },
             icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
-            onClick = { viewModel.getVerse() },
+            onClick = { viewModel.getVerse(false) },
             modifier = Modifier.padding(top = 5.dp, bottom = 10.dp)
         )
     }
@@ -117,14 +120,13 @@ fun ButtonRefresh(viewModel: AyahViewModel) {
 fun ButtonTile() {
     Box(contentAlignment = Alignment.Center) {
         val context = LocalContext.current
-
         Chip(
-            label = { Text("Refresh") },
-            icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
+            label = { Text("Quran Tile") },
+            icon = { Icon(Icons.Default.CropSquare, contentDescription = "Quran Tile") },
             onClick = {
                 context.startActivity(Intent(context, TileRendererActivity::class.java))
             },
-            modifier = Modifier.padding(top = 5.dp, bottom = 10.dp)
+            modifier = Modifier.padding(top = 5.dp)
         )
     }
 }
@@ -152,6 +154,9 @@ fun ButtonShare(viewModel: AyahViewModel) {
 @Composable
 fun LoadingAnimation() {
     val infiniteTransition = rememberInfiniteTransition()
+    val formFactor = stringResource(id = R.string.form_factor)
+    val isRound by remember { mutableStateOf(isRound(formFactor)) }
+
     val size by infiniteTransition.animateValue(
         initialValue = 100.dp,
         targetValue = 200.dp,
@@ -176,11 +181,10 @@ fun LoadingAnimation() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(30.dp))
+                    .clip(if (isRound) CircleShape else RoundedCornerShape(30.dp))
                     .size(size)
                     .background(color),
                 contentAlignment = Alignment.Center
@@ -193,4 +197,10 @@ fun LoadingAnimation() {
             )
         }
     }
+}
+
+private fun isRound(resource: String): Boolean {
+    if (resource.contains("Square"))
+        return false
+    return true
 }

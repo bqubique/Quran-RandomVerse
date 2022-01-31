@@ -29,7 +29,7 @@
 
         <service
             android:name=".view.tile.QuranTile"
-            android:description="@string/hello_world"
+            android:description="@string/form_factor"
             android:exported="true"
             android:label="Quran Random Verse"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
