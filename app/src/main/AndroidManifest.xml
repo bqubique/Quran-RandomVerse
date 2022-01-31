@@ -15,17 +15,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
+        <activity
+            android:name=".view.tile.TileRendererActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_twotone_menu_book_24_primary_color" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary" />
 
         <service
-            android:name=".view.QuranTile"
+            android:name=".view.tile.QuranTile"
             android:description="@string/hello_world"
             android:exported="true"
             android:label="Quran Random Verse"
@@ -47,14 +50,11 @@
         <!-- <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" /> -->
         <!-- </intent-filter> -->
         <!-- </service> -->
-
-        <service
-            android:name=".NotificationsService">
+        <service android:name=".NotificationsService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -73,6 +73,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

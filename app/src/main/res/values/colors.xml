@@ -4,4 +4,5 @@
     <color name="aqua_txt">#BBE1FA</color>
     <color name="blue_txt">#3282B8</color>
     <color name="primary">#FFBB86FC</color>
+    <color name="primary50">#43ff646e</color>
 </resources>

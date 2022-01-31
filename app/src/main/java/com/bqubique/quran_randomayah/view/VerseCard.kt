@@ -1,6 +1,6 @@
 package com.bqubique.quran_randomayah.view
 
-import android.util.Log
+import android.content.Intent
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -16,18 +16,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.glance.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.foundation.BasicCurvedText
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.material.*
 import com.bqubique.quran_randomayah.model.ArabicAyah
 import com.bqubique.quran_randomayah.model.Ayah
+import com.bqubique.quran_randomayah.view.tile.TileRendererActivity
 import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
 import com.google.android.gms.wearable.Wearable
 
@@ -74,6 +75,7 @@ fun VerseCardBody(
             ) {
                 item { VerseCard(arabicVerse = arabicVerse, englishVerse = englishVerse) }
                 item { ButtonRefresh(viewModel = viewModel) }
+                item { ButtonTile() }
 //                item { ButtonShare(viewModel = viewModel) }
             }
         }
@@ -112,8 +114,24 @@ fun ButtonRefresh(viewModel: AyahViewModel) {
 }
 
 @Composable
+fun ButtonTile() {
+    Box(contentAlignment = Alignment.Center) {
+        val context = LocalContext.current
+
+        Chip(
+            label = { Text("Refresh") },
+            icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
+            onClick = {
+                context.startActivity(Intent(context, TileRendererActivity::class.java))
+            },
+            modifier = Modifier.padding(top = 5.dp, bottom = 10.dp)
+        )
+    }
+}
+
+@Composable
 fun ButtonShare(viewModel: AyahViewModel) {
-//    val context = LocalContext.current
+    val context = LocalContext.current
     Box(contentAlignment = Alignment.Center) {
         Chip(
             label = { Text("Share") },
