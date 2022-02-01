@@ -1,6 +1,7 @@
 package com.bqubique.quran_randomayah.view
 
 import android.content.Intent
+import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
@@ -29,10 +30,12 @@ import androidx.wear.compose.foundation.BasicCurvedText
 import androidx.wear.compose.foundation.CurvedTextStyle
 import androidx.wear.compose.material.*
 import com.bqubique.quran_randomayah.R
-import com.bqubique.quran_randomayah.model.ArabicAyah
-import com.bqubique.quran_randomayah.model.Ayah
+import com.bqubique.quran_randomayah.model.hadith.Hadith
+import com.bqubique.quran_randomayah.model.verse.ArabicAyah
+import com.bqubique.quran_randomayah.model.verse.Ayah
 import com.bqubique.quran_randomayah.view.tile.TileRendererActivity
 import com.bqubique.quran_randomayah.viewmodel.AyahViewModel
+import org.jsoup.Jsoup
 
 const val TAG = "VerseCard"
 
@@ -45,6 +48,8 @@ fun VerseCardBody(
     val isLoading = viewModel.loading.observeAsState()
     val arabicVerse = viewModel.arabicVerse.observeAsState()
     val englishVerse = viewModel.englishVerse.observeAsState()
+    val hadith = viewModel.hadith.observeAsState()
+
 
     if (!isLoading.value!!) {
         Scaffold(
@@ -76,6 +81,7 @@ fun VerseCardBody(
                 )
             ) {
                 item { VerseCard(arabicVerse = arabicVerse, englishVerse = englishVerse) }
+                item { HadithCard(hadith = hadith) }
                 item { ButtonRefresh(viewModel = viewModel) }
                 item { ButtonTile() }
             }
@@ -84,6 +90,25 @@ fun VerseCardBody(
         LoadingAnimation()
     }
 }
+
+@Composable
+fun HadithCard(hadith: State<Hadith?>) {
+
+    TitleCard(
+        onClick = { },
+        title = {
+            Text(
+                hadith.value!!.hadith[0].chapterNumber + ". " + hadith.value!!.hadith[0].chapterTitle,
+                fontSize = 13.sp,
+            )
+        },
+        content = {
+            Text(renderHtml(hadith.value!!.hadith[1].body) + "\n" + renderHtml(hadith.value!!.hadith[0].body))
+        },
+        modifier = Modifier.padding(top = 10.dp)
+    )
+}
+
 
 @Composable
 fun VerseCard(arabicVerse: State<ArabicAyah?>, englishVerse: State<Ayah?>) {
@@ -108,7 +133,7 @@ fun ButtonRefresh(viewModel: AyahViewModel) {
         Chip(
             label = { Text("Refresh") },
             icon = { Icon(Icons.Default.Refresh, contentDescription = "Refresh") },
-            onClick = { viewModel.getVerse(false) },
+            onClick = { viewModel.getVerse() },
             modifier = Modifier.padding(top = 5.dp, bottom = 10.dp)
         )
     }
@@ -181,4 +206,11 @@ private fun isRound(resource: String): Boolean {
     if (resource.contains("Square"))
         return false
     return true
+}
+
+private fun renderHtml(html: String): String {
+    val html = Jsoup.parse(html)
+    Log.d(TAG, "renderHtml: HERE")
+    Log.d(TAG, "renderHtml: ${html.select("p").text()}")
+    return html.select("p").text()
 }

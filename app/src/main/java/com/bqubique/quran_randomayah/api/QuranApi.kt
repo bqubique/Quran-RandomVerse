@@ -1,7 +1,7 @@
 package com.bqubique.quran_randomayah.api
 
-import com.bqubique.quran_randomayah.model.ArabicAyah
-import com.bqubique.quran_randomayah.model.Ayah
+import com.bqubique.quran_randomayah.model.verse.ArabicAyah
+import com.bqubique.quran_randomayah.model.verse.Ayah
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -56,36 +56,44 @@ dependencies {
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
     //Tiles
-    implementation("androidx.wear.tiles:tiles:1.0.0")
-    debugImplementation("androidx.wear.tiles:tiles-renderer:1.0.0")
+    implementation("androidx.wear.tiles:tiles:1.0.1")
+    debugImplementation("androidx.wear.tiles:tiles-renderer:1.0.1")
 
     //Coroutines
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.5.2")
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 
     //Compose
-    implementation "androidx.activity:activity-compose:$activity_compose_version"
-    implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation "androidx.wear.compose:compose-material:$wear_compose_version"
-    implementation "androidx.wear.compose:compose-foundation:$wear_compose_version"
+    implementation("androidx.activity:activity-compose:$activity_compose_version")
+    implementation("androidx.compose.ui:ui-tooling-preview:$compose_version")
+    implementation("androidx.wear.compose:compose-material:$wear_compose_version")
+    implementation("androidx.wear.compose:compose-foundation:$wear_compose_version")
 
     //observeAsState
-    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation("androidx.compose.runtime:runtime-livedata:$compose_version")
 
     //Material icons
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation("androidx.compose.material:material-icons-extended:$compose_version")
 
     //Glance Tiles
-    implementation "androidx.glance:glance-wear-tiles:1.0.0-alpha02"
+    implementation("androidx.glance:glance-wear-tiles:1.0.0-alpha02")
 
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation('com.google.firebase:firebase-analytics-ktx')
+    implementation('com.google.firebase:firebase-messaging-ktx')
 
     //Data layer
-    implementation 'com.google.android.gms:play-services-wearable:17.1.0'
+    implementation('com.google.android.gms:play-services-wearable:17.1.0')
+
+    //http logging interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    //JSOUP for HTML parsing
+    implementation("org.jsoup:jsoup:1.13.1")
+
+
 
 }

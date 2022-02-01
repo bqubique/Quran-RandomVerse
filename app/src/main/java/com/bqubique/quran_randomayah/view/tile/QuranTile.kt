@@ -9,7 +9,7 @@ import com.bqubique.quran_randomayah.R
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.guava.future
 import com.bqubique.quran_randomayah.api.QuranApi
-import com.bqubique.quran_randomayah.model.Ayah
+import com.bqubique.quran_randomayah.model.verse.Ayah
 import com.bqubique.quran_randomayah.util.TileDrawables.asrPictures
 import com.bqubique.quran_randomayah.util.TileDrawables.dhuhrPictures
 import com.bqubique.quran_randomayah.util.TileDrawables.maghribPictures
