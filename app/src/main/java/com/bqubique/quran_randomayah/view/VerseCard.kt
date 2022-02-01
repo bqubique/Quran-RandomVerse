@@ -49,7 +49,7 @@ fun VerseCardBody(
     val arabicVerse = viewModel.arabicVerse.observeAsState()
     val englishVerse = viewModel.englishVerse.observeAsState()
     val hadith = viewModel.hadith.observeAsState()
-
+    Log.d(TAG, "VerseCardBody: ${lazyScalingLazyListState.centerItemIndex}")
 
     if (!isLoading.value!!) {
         Scaffold(
@@ -58,7 +58,10 @@ fun VerseCardBody(
                 TimeText(
                     leadingLinearContent = {
                         Text(
-                            arabicVerse.value?.verses?.get(0)?.verseKey!!,
+                            if (lazyScalingLazyListState.centerItemIndex == -1)
+                                arabicVerse.value?.verses?.get(0)?.verseKey!!
+                            else
+                                hadith.value?.bookNumber!!,
                             style = TextStyle(color = MaterialTheme.colors.primary)
                         )
                     },
