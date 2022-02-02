@@ -18,7 +18,7 @@
         <activity
             android:name=".view.tile.TileRendererActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -26,6 +26,21 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary" />
+
+        <service
+            android:name=".view.tile.HadithTile"
+            android:description="@string/form_factor"
+            android:exported="true"
+            android:label="Random Hadith"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/ic_launcher_hadith" />
+        </service>
 
         <service
             android:name=".view.tile.QuranTile"
@@ -40,7 +55,8 @@
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
                 android:resource="@drawable/ic_launcher_foreground" />
-        </service> <!-- <service -->
+        </service>
+        <!-- <service -->
         <!-- android:name=".view.HelloTileService" -->
         <!-- android:description="@string/app_name" -->
         <!-- android:exported="true" -->

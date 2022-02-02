@@ -158,4 +158,7 @@ class QuranTile : androidx.wear.tiles.TileService() {
 
         return englishVerseResponse
     }
+
+
 }
+
