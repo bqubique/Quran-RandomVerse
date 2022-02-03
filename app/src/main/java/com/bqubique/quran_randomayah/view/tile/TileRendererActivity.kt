@@ -16,7 +16,7 @@ class TileRendererActivity : AppCompatActivity() {
         val rootLayout = findViewById<FrameLayout>(R.id.tile_container)
         tileUiClient = TileUiClient(
             context = this,
-            component = ComponentName(this, QuranTile::class.java),
+            component = ComponentName(this, HadithTile::class.java),
             parentView = rootLayout
         )
         tileUiClient.connect()

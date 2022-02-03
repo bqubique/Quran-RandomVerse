@@ -161,7 +161,7 @@ fun ButtonTile() {
 fun LoadingAnimation() {
     val infiniteTransition = rememberInfiniteTransition()
     val formFactor = stringResource(id = R.string.form_factor)
-    val isRound by remember { mutableStateOf(isRound(formFactor)) }
+    val isRound by remember { mutableStateOf(isSquare(formFactor)) }
 
     val size by infiniteTransition.animateValue(
         initialValue = 100.dp,
@@ -205,15 +205,7 @@ fun LoadingAnimation() {
     }
 }
 
-private fun isRound(resource: String): Boolean {
-    if (resource.contains("Square"))
-        return false
-    return true
-}
+private fun isSquare(resource: String): Boolean = resource.contains("Square")
 
-private fun renderHtml(html: String): String {
-    val html = Jsoup.parse(html)
-    Log.d(TAG, "renderHtml: HERE")
-    Log.d(TAG, "renderHtml: ${html.select("p").text()}")
-    return html.select("p").text()
-}
+
+private fun renderHtml(html: String): String = Jsoup.parse(html).select("p").text()

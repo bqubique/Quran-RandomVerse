@@ -1,17 +1,16 @@
 package com.bqubique.quran_randomayah.view.tile
 
-import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.wear.tiles.*
 import androidx.wear.tiles.ColorBuilders.argb
 import androidx.wear.tiles.DimensionBuilders.dp
 import androidx.wear.tiles.DimensionBuilders.expand
+import androidx.wear.tiles.LayoutElementBuilders.TEXT_OVERFLOW_ELLIPSIZE_END
 import com.bqubique.quran_randomayah.R
 import com.bqubique.quran_randomayah.api.HadithApi
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.guava.future
 import com.bqubique.quran_randomayah.model.hadith.Hadith
-import com.bqubique.quran_randomayah.model.verse.Ayah
 import com.bqubique.quran_randomayah.util.TileDrawables.asrPictures
 import com.bqubique.quran_randomayah.util.TileDrawables.dhuhrPictures
 import com.bqubique.quran_randomayah.util.TileDrawables.maghribPictures
@@ -134,6 +133,10 @@ class HadithTile : androidx.wear.tiles.TileService() {
                     .addContent(
                         LayoutElementBuilders.Text.Builder()
                             .setText(renderHtml(hadith.hadith[0].body))
+                            .setOverflow(
+                                LayoutElementBuilders.TextOverflowProp.Builder()
+                                    .setValue(TEXT_OVERFLOW_ELLIPSIZE_END).build()
+                            )
                             .setMaxLines(10)
                             .setFontStyle(
                                 LayoutElementBuilders.FontStyles.caption2(deviceParameters)
@@ -155,22 +158,16 @@ class HadithTile : androidx.wear.tiles.TileService() {
     private fun getHadith(): Hadith {
         lateinit var hadith: Hadith
 
-        do {
-            runBlocking {
-                CoroutineScope(Dispatchers.IO).launch {
-                    hadith = quranApi.getRandomHadith().body()!!
-                }.join()
-            }
-        } while (renderHtml(hadith.hadith[0].body).length > 150)
+        runBlocking {
+            CoroutineScope(Dispatchers.IO).launch {
+                hadith = quranApi.getRandomHadith().body()!!
+            }.join()
+        }
 
         return hadith
     }
 
 
-    private fun renderHtml(html: String): String {
-        val html = Jsoup.parse(html)
-        Log.d(com.bqubique.quran_randomayah.view.TAG, "renderHtml: HERE")
-        Log.d(com.bqubique.quran_randomayah.view.TAG, "renderHtml: ${html.select("p").text()}")
-        return html.select("p").text()
-    }
+    private fun renderHtml(html: String): String = Jsoup.parse(html).select("p").text()
+
 }
