@@ -14,12 +14,15 @@ fun ReminderScaffold(
     arabic: String,
     icon: @Composable () -> Unit,
     onRefresh: () -> Unit,
+    scalingLazyListState: ScalingLazyListState,
     isVerse: Boolean = true
 ) {
 
     ScalingLazyColumn(contentPadding = PaddingValues(
         top = 40.dp, start = 10.dp, end = 10.dp, bottom = 30.dp
-    ), content = {
+    ),
+        state = scalingLazyListState,
+        content = {
         item {
             Button(
                 onClick = {}, modifier = Modifier.padding(10.dp)

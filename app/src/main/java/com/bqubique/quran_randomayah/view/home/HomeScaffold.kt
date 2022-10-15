@@ -3,7 +3,9 @@
 package com.bqubique.quran_randomayah.view.home
 
 import android.util.Log
+import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Hearing
@@ -41,6 +43,8 @@ fun HomeScaffold(
     val hadith = hadithViewModel.hadith.observeAsState()
 
     val pagerState = rememberPagerState()
+    val verseScrollState = rememberScalingLazyListState()
+    val hadithScrollState = rememberScalingLazyListState()
 
     if (!isLoadingVerse.value!! && !isLoadingHadith.value!!) {
         Scaffold(
@@ -58,6 +62,9 @@ fun HomeScaffold(
                     },
                 )
             },
+            positionIndicator = {
+                PositionIndicator(scalingLazyListState = if (pagerState.currentPage == 0) verseScrollState else hadithScrollState)
+            }
         ) {
             HorizontalPager(count = 2, state = pagerState) { page ->
                 if (page == 0) {
@@ -71,6 +78,7 @@ fun HomeScaffold(
                                 tint = MaterialTheme.colors.onPrimary,
                             )
                         },
+                        scalingLazyListState = verseScrollState,
                         onRefresh = { verseViewModel.getVerse() },
                         isVerse = true,
                     )
@@ -85,8 +93,10 @@ fun HomeScaffold(
                                 tint = MaterialTheme.colors.onPrimary,
                             )
                         },
+                        scalingLazyListState = hadithScrollState,
                         onRefresh = { hadithViewModel.getHadith() },
                         isVerse = false,
+
                     )
                 }
             }
