@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import androidx.wear.compose.material.*
-import com.bqubique.quran_randomayah.theme.WearAppTheme
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Preview
+import com.bqubique.quran_randomayah.theme.AppTheme
+import com.bqubique.quran_randomayah.view.verse.VerseScaffold
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,8 +20,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalWearMaterialApi::class)
 @Composable
 fun WearApp() {
-    WearAppTheme { VerseCardBody() }
+    AppTheme {
+        VerseScaffold()
+    }
+}
+
+
+@Preview(device = Devices.WEAR_OS_LARGE_ROUND, showSystemUi = true)
+@Composable
+fun DefaultPreview() {
+    WearApp()
 }

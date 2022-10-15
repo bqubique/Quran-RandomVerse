@@ -9,16 +9,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.bqubique.QuranApplication"
+        android:name=".NobleReminderApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
-        <activity
-            android:name=".view.tile.TileRendererActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+<!--        <activity-->
+<!--            android:name=".view.tile.TileRendererActivity"-->
+<!--            android:exported="false"-->
+<!--            android:theme="@style/Theme.AppCompat.NoActionBar" />-->
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -27,35 +27,35 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary" />
 
-        <service
-            android:name=".view.tile.HadithTile"
-            android:description="@string/hadith_tile"
-            android:exported="true"
-            android:label="Random Hadith"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
-            </intent-filter>
+<!--        <service-->
+<!--            android:name=".view.tile.HadithTile"-->
+<!--            android:description="@string/hadith_tile"-->
+<!--            android:exported="true"-->
+<!--            android:label="Random Hadith"-->
+<!--            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />-->
+<!--            </intent-filter>-->
 
-            <meta-data
-                android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher_hadith" />
-        </service>
+<!--            <meta-data-->
+<!--                android:name="androidx.wear.tiles.PREVIEW"-->
+<!--                android:resource="@drawable/ic_launcher_hadith" />-->
+<!--        </service>-->
 
-        <service
-            android:name=".view.tile.QuranTile"
-            android:description="@string/quran_tile"
-            android:exported="true"
-            android:label="Quran Random Verse"
-            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
-            <intent-filter>
-                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
-            </intent-filter>
+<!--        <service-->
+<!--            android:name=".view.tile.QuranTile"-->
+<!--            android:description="@string/quran_tile"-->
+<!--            android:exported="true"-->
+<!--            android:label="Quran Random Verse"-->
+<!--            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />-->
+<!--            </intent-filter>-->
 
-            <meta-data
-                android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher_foreground" />
-        </service>
+<!--            <meta-data-->
+<!--                android:name="androidx.wear.tiles.PREVIEW"-->
+<!--                android:resource="@drawable/ic_launcher_foreground" />-->
+<!--        </service>-->
 
         <!-- <service -->
         <!-- android:name=".view.HelloTileService" -->
@@ -68,7 +68,8 @@
         <!-- </intent-filter> -->
         <!-- </service> -->
 
-        <service android:name=".NotificationsService">
+        <service android:name=".NotificationsService"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -87,8 +88,7 @@
 
         <activity
             android:name=".view.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

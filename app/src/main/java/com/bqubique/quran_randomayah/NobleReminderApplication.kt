@@ -1,7 +1,7 @@
-package com.bqubique
+package com.bqubique.quran_randomayah
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class QuranApplication : Application()
+class NobleReminderApplication : Application()

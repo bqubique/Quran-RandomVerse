@@ -1,7 +1,8 @@
-package com.bqubique.quran_randomayah.model.verse
+package com.bqubique.quran_randomayah.model.english_verse_model
 
 
 import com.google.gson.annotations.SerializedName
+
 
 data class Translation(
     @SerializedName("id")

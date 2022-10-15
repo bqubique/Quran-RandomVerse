@@ -1,7 +1,8 @@
-package com.bqubique.quran_randomayah.model.verse
+package com.bqubique.quran_randomayah.model.english_verse_model
 
 
 import com.google.gson.annotations.SerializedName
+
 
 data class Verse(
     @SerializedName("hizb_number")
@@ -10,14 +11,16 @@ data class Verse(
     val id: Int,
     @SerializedName("juz_number")
     val juzNumber: Int,
+    @SerializedName("manzil_number")
+    val manzilNumber: Int,
     @SerializedName("page_number")
     val pageNumber: Int,
-    @SerializedName("rub_number")
-    val rubNumber: Int,
+    @SerializedName("rub_el_hizb_number")
+    val rubElHizbNumber: Int,
+    @SerializedName("ruku_number")
+    val rukuNumber: Int,
     @SerializedName("sajdah_number")
     val sajdahNumber: Any,
-    @SerializedName("sajdah_type")
-    val sajdahType: Any,
     @SerializedName("translations")
     val translations: List<Translation>,
     @SerializedName("verse_key")
