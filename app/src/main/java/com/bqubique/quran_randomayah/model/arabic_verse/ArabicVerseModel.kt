@@ -1,4 +1,4 @@
-package com.bqubique.quran_randomayah.model.arabic_verse_model
+package com.bqubique.quran_randomayah.model.arabic_verse
 
 
 import com.google.gson.annotations.SerializedName

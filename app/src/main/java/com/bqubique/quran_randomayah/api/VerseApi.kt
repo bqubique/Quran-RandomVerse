@@ -1,12 +1,12 @@
 package com.bqubique.quran_randomayah.api
 
-import com.bqubique.quran_randomayah.model.arabic_verse_model.ArabicVerseModel
-import com.bqubique.quran_randomayah.model.english_verse_model.EnglishVerseModel
+import com.bqubique.quran_randomayah.model.arabic_verse.ArabicVerseModel
+import com.bqubique.quran_randomayah.model.english_verse.EnglishVerseModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface Api {
+interface VerseApi {
 
     @GET("api/v4/verses/random?language=en&translations=22#")
     suspend fun getRandomEnglishVerse(): Response<EnglishVerseModel>

@@ -1,11 +1,8 @@
 package com.bqubique.quran_randomayah.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
-
 import androidx.compose.runtime.Composable
 import androidx.wear.compose.material.Colors
 import androidx.wear.compose.material.MaterialTheme
-
 
 val LightColors = Colors(
     primary = md_theme_light_primary,
@@ -37,10 +34,6 @@ val DarkColors = Colors(
 )
 
 @Composable
-fun AppTheme(
-    content: @Composable() () -> Unit
-) {
-    MaterialTheme(
-        colors = DarkColors, content = content
-    )
+fun AppTheme(content: @Composable() () -> Unit) {
+    MaterialTheme(colors = DarkColors, content = content)
 }

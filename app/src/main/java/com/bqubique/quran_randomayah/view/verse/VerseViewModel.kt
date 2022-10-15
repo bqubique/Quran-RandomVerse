@@ -4,16 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bqubique.quran_randomayah.api.Api
-import com.bqubique.quran_randomayah.model.arabic_verse_model.ArabicVerseModel
-import com.bqubique.quran_randomayah.model.english_verse_model.EnglishVerseModel
+import com.bqubique.quran_randomayah.api.VerseApi
+import com.bqubique.quran_randomayah.model.arabic_verse.ArabicVerseModel
+import com.bqubique.quran_randomayah.model.english_verse.EnglishVerseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class  VerseViewModel @Inject constructor(
-    private val api: Api
+class VerseViewModel @Inject constructor(
+    private val verseApi: VerseApi
 ) : ViewModel() {
     private var _englishVerse = MutableLiveData<EnglishVerseModel>()
     var englishVerse: LiveData<EnglishVerseModel> = _englishVerse
@@ -28,13 +28,14 @@ class  VerseViewModel @Inject constructor(
         getVerse()
     }
 
-     fun getVerse() {
+    fun getVerse() {
         _loading.value = true
         viewModelScope.launch {
-            _englishVerse.value = api.getRandomEnglishVerse().body()
-            _arabicVerse.value = api.getArabicVerseByVerseKey(verseKey = _englishVerse.value!!.verse.verseKey).body()
+            _englishVerse.value = verseApi.getRandomEnglishVerse().body()
+            _arabicVerse.value =
+                verseApi.getArabicVerseByVerseKey(verseKey = _englishVerse.value!!.verse.verseKey)
+                    .body()
             _loading.value = false
         }
-
     }
 }

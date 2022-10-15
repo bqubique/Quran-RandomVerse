@@ -103,4 +103,7 @@ dependencies {
 
     //JSOUP for HTML parsing
     implementation("org.jsoup:jsoup:1.13.1")
+
+    //Pager from Accompanist
+    implementation 'com.google.accompanist:accompanist-pager:0.26.5-rc'
 }
