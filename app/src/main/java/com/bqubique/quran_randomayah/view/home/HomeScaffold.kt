@@ -44,7 +44,7 @@ fun HomeScaffold(
     val verseScrollState = rememberScalingLazyListState()
     val hadithScrollState = rememberScalingLazyListState()
 
-    if (!isLoadingVerse.value!! and  !isLoadingHadith.value!!) {
+    if (!isLoadingVerse.value!! and !isLoadingHadith.value!!) {
         Scaffold(vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
             timeText = {
                 TimeText(
@@ -65,7 +65,8 @@ fun HomeScaffold(
             HorizontalPager(count = 2, state = pagerState) { page ->
                 if (page == 0) {
                     ReminderScaffold(
-                        english = Jsoup.parse(englishVerse.value!!.verse.translations[0].text).text(),
+                        english = Jsoup.parse(englishVerse.value!!.verse.translations[0].text)
+                            .text(),
                         arabic = Jsoup.parse(arabicVerse.value!!.verses[0].textUthmani).text(),
                         icon = {
                             Icon(
@@ -80,8 +81,16 @@ fun HomeScaffold(
                     )
                 } else {
                     ReminderScaffold(
-                        english = if(hadith.value?.hadith?.get(0)?.body!=null) Jsoup.parse(hadith.value?.hadith?.get(0)?.body!!).text() else "",
-                        arabic = if(hadith.value?.hadith?.get(1)?.body!=null) Jsoup.parse(hadith.value?.hadith?.get(1)?.body!!).text() else "",
+                        english = if (hadith.value?.hadith?.get(0)?.body != null) Jsoup.parse(
+                            hadith.value?.hadith?.get(
+                                0
+                            )?.body!!
+                        ).text() else "",
+                        arabic = if (hadith.value?.hadith?.get(1)?.body != null) Jsoup.parse(
+                            hadith.value?.hadith?.get(
+                                1
+                            )?.body!!
+                        ).text() else "",
                         icon = {
                             Icon(
                                 Icons.Outlined.Hearing,
@@ -92,8 +101,7 @@ fun HomeScaffold(
                         scalingLazyListState = hadithScrollState,
                         onRefresh = { hadithViewModel.getHadith() },
                         isVerse = false,
-
-                        )
+                    )
                 }
             }
         }
@@ -102,7 +110,5 @@ fun HomeScaffold(
             LoadingAnimation(isVerse = pagerState.currentPage == 0)
         }
     }
-
-
 }
 

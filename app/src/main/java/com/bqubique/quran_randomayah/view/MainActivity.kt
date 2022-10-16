@@ -1,6 +1,7 @@
 package com.bqubique.quran_randomayah.view
 
 import android.os.Bundle
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColor
@@ -44,7 +45,29 @@ class MainActivity : ComponentActivity() {
 
             NobleReminder(networkStatus = networkStatus)
         }
+
+
     }
+
+//    override fun onGenericMotionEvent(event: MotionEvent?): Boolean {
+//        if (event!!.action == MotionEvent.ACTION_SCROLL &&
+//            event.isFromSource(InputDeviceCompat.SOURCE_ROTARY_ENCODER)
+//        ) {
+//            // Don't forget the negation here
+//            val delta = -event.getAxisValue(MotionEventCompat.AXIS_SCROLL) *
+//                    ViewConfigurationCompat.getScaledVerticalScrollFactor(
+//                        ViewConfiguration.get(baseContext), baseContext
+//                    )
+//
+//            Log.i("MainActivity", delta.roundToInt().toString())
+//
+//            true
+//        } else {
+//            false
+//        }
+//
+//        return super.onGenericMotionEvent(event)
+//    }
 }
 
 @Composable
