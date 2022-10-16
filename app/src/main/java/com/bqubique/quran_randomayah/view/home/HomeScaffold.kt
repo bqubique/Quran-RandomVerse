@@ -3,13 +3,10 @@
 package com.bqubique.quran_randomayah.view.home
 
 import android.util.Log
-import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Hearing
-import androidx.compose.material.icons.outlined.MenuBook
+import androidx.compose.material.icons.outlined.*
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -33,7 +30,7 @@ import org.jsoup.Jsoup
 @Composable
 fun HomeScaffold(
     verseViewModel: VerseViewModel = hiltViewModel(),
-    hadithViewModel: HadithViewModel = hiltViewModel(),
+    hadithViewModel: HadithViewModel = hiltViewModel()
 ) {
     val isLoadingVerse = verseViewModel.loading.observeAsState()
     val arabicVerse = verseViewModel.arabicVerse.observeAsState()
@@ -43,20 +40,20 @@ fun HomeScaffold(
     val hadith = hadithViewModel.hadith.observeAsState()
 
     val pagerState = rememberPagerState()
+
     val verseScrollState = rememberScalingLazyListState()
     val hadithScrollState = rememberScalingLazyListState()
 
-    if (!isLoadingVerse.value!! && !isLoadingHadith.value!!) {
-        Scaffold(
-            vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
+    if (!isLoadingVerse.value!! and  !isLoadingHadith.value!!) {
+        Scaffold(vignette = { Vignette(vignettePosition = VignettePosition.TopAndBottom) },
             timeText = {
                 TimeText(
                     startLinearContent = {
-                        Text(text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.bookNumber + ":" + hadith.value?.hadithNumber)
+                        Text(text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.collection + ":" + hadith.value?.hadithNumber)
                     },
                     startCurvedContent = {
                         curvedText(
-                            text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.bookNumber?.replaceFirstChar { c -> c.uppercaseChar() } + ":" + hadith.value?.hadithNumber,
+                            text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.collection?.replaceFirstChar { c -> c.uppercaseChar() } + ":" + hadith.value?.hadithNumber,
                             style = CurvedTextStyle(color = DarkColors.primary),
                         )
                     },
@@ -64,13 +61,12 @@ fun HomeScaffold(
             },
             positionIndicator = {
                 PositionIndicator(scalingLazyListState = if (pagerState.currentPage == 0) verseScrollState else hadithScrollState)
-            }
-        ) {
+            }) {
             HorizontalPager(count = 2, state = pagerState) { page ->
                 if (page == 0) {
                     ReminderScaffold(
-                        english = englishVerse.value!!.verse.translations[0].text,
-                        arabic = arabicVerse.value!!.verses[0].textUthmani,
+                        english = Jsoup.parse(englishVerse.value!!.verse.translations[0].text).text(),
+                        arabic = Jsoup.parse(arabicVerse.value!!.verses[0].textUthmani).text(),
                         icon = {
                             Icon(
                                 Icons.Outlined.MenuBook,
@@ -84,8 +80,8 @@ fun HomeScaffold(
                     )
                 } else {
                     ReminderScaffold(
-                        english = Jsoup.parse(hadith.value?.hadith?.get(0)?.body!!).text(),
-                        arabic = Jsoup.parse(hadith.value?.hadith?.get(1)?.body!!).text(),
+                        english = if(hadith.value?.hadith?.get(0)?.body!=null) Jsoup.parse(hadith.value?.hadith?.get(0)?.body!!).text() else "",
+                        arabic = if(hadith.value?.hadith?.get(1)?.body!=null) Jsoup.parse(hadith.value?.hadith?.get(1)?.body!!).text() else "",
                         icon = {
                             Icon(
                                 Icons.Outlined.Hearing,
@@ -97,16 +93,16 @@ fun HomeScaffold(
                         onRefresh = { hadithViewModel.getHadith() },
                         isVerse = false,
 
-                    )
+                        )
                 }
             }
         }
     } else {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            LoadingAnimation(
-                isVerse = pagerState.currentPage == 0
-            )
+            LoadingAnimation(isVerse = pagerState.currentPage == 0)
         }
     }
+
+
 }
 

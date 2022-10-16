@@ -1,5 +1,6 @@
 package com.bqubique.quran_randomayah.view.home
 
+import android.util.Log
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background

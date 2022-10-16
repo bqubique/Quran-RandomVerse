@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.wear.compose.material.*
 
+
 @Composable
 fun ReminderScaffold(
     english: String,
@@ -17,7 +18,6 @@ fun ReminderScaffold(
     scalingLazyListState: ScalingLazyListState,
     isVerse: Boolean = true
 ) {
-
     ScalingLazyColumn(contentPadding = PaddingValues(
         top = 40.dp, start = 10.dp, end = 10.dp, bottom = 30.dp
     ),
@@ -38,6 +38,17 @@ fun ReminderScaffold(
             )
         }
         item {
+//            Box(contentAlignment = Alignment.Center) {
+//                val context = LocalContext.current
+//                Chip(
+//                    label = { Text("Quran Tile") },
+//                    icon = { Icon(Icons.TwoTone.CropSquare, contentDescription = "Quran Tile") },
+//                    onClick = {
+//                        context.startActivity(Intent(context, TileRendererActivity::class.java))
+//                    },
+//                    modifier = Modifier.padding(top = 5.dp)
+//                )
+//            }
             Button(
                 onClick = {
                     onRefresh()
@@ -45,7 +56,7 @@ fun ReminderScaffold(
             ) {
                 Icon(
                     imageVector = Icons.Filled.Refresh,
-                    contentDescription = "Refresh ${if(isVerse) "Verse" else "Hadith"}",
+                    contentDescription = "Refresh ${if (isVerse) "Verse" else "Hadith"}",
                 )
             }
         }

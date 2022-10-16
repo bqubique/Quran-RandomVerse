@@ -8,9 +8,14 @@ import androidx.wear.compose.material.Text
 
 @Composable
 fun ReminderCard(modifier: Modifier, arabicVerse: String, englishVerse: String) {
-    return AppCard(modifier = modifier,
+
+    //Sometimes some English verses include numeric characters (most probably due to footnotes"
+    //filter them out with this Regex object
+    val regex = Regex("[0-9]")
+
+    AppCard(modifier = modifier,
         onClick = { /*TODO*/ },
         appName = { Text(arabicVerse) },
         time = {},
-        title = { Text(englishVerse) }) {}
+        title = { Text(regex.replace(englishVerse, "")) }) {}
 }

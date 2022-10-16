@@ -1,15 +1,15 @@
 package com.bqubique.quran_randomayah.view.tile
 //
-//import android.util.Log
 //import androidx.core.content.ContextCompat
 //import androidx.wear.tiles.*
 //import androidx.wear.tiles.ColorBuilders.argb
 //import androidx.wear.tiles.DimensionBuilders.dp
 //import androidx.wear.tiles.DimensionBuilders.expand
 //import com.bqubique.quran_randomayah.R
+//import com.bqubique.quran_randomayah.api.HadithApi
 //import com.google.common.util.concurrent.ListenableFuture
 //import kotlinx.coroutines.guava.future
-//import com.bqubique.quran_randomayah.model.hadith.Hadith
+//import com.bqubique.quran_randomayah.model.hadith.HadithModel
 //import com.bqubique.quran_randomayah.util.TileDrawables.asrPictures
 //import com.bqubique.quran_randomayah.util.TileDrawables.dhuhrPictures
 //import com.bqubique.quran_randomayah.util.TileDrawables.maghribPictures
@@ -24,7 +24,7 @@ package com.bqubique.quran_randomayah.view.tile
 //private const val TAG = "HadithTile"
 //
 //@AndroidEntryPoint
-//class HadithTile : androidx.wear.tiles.TileService() {
+//class HadithTile : TileService() {
 //    private val serviceJob = Job()
 //    private val serviceScope = CoroutineScope(Dispatchers.IO + serviceJob)
 //
@@ -81,7 +81,7 @@ package com.bqubique.quran_randomayah.view.tile
 //    }
 //
 //    private fun layout(
-//        hadith: Hadith,
+//        hadithModel: HadithModel,
 //        deviceParameters: DeviceParametersBuilders.DeviceParameters
 //    ) =
 //        LayoutElementBuilders.Box.Builder()
@@ -118,7 +118,7 @@ package com.bqubique.quran_randomayah.view.tile
 //                LayoutElementBuilders.Column.Builder()
 //                    .addContent(
 //                        LayoutElementBuilders.Text.Builder()
-//                            .setText(renderHtml(hadith.hadith[0].chapterTitle))
+//                            .setText(renderHtml(hadithModel.hadith[0].chapterTitle))
 //                            .setFontStyle(
 //                                LayoutElementBuilders.FontStyle.Builder().setColor(
 //                                    argb(ContextCompat.getColor(this, R.color.primary))
@@ -131,7 +131,7 @@ package com.bqubique.quran_randomayah.view.tile
 //                    .addContent(LayoutElementBuilders.Spacer.Builder().setHeight(dp(5F)).build())
 //                    .addContent(
 //                        LayoutElementBuilders.Text.Builder()
-//                            .setText(renderHtml(hadith.hadith[0].body))
+//                            .setText(renderHtml(hadithModel.hadith[0].body))
 //                            .setMaxLines(10)
 //                            .setFontStyle(
 //                                LayoutElementBuilders.FontStyles.caption2(deviceParameters)
@@ -150,8 +150,8 @@ package com.bqubique.quran_randomayah.view.tile
 //            .build()
 //
 //
-//    private fun getHadith(): Hadith {
-//        lateinit var hadith: Hadith
+//    private fun getHadith(): HadithModel {
+//        lateinit var hadith: HadithModel
 //
 //        do {
 //            runBlocking {
@@ -167,8 +167,6 @@ package com.bqubique.quran_randomayah.view.tile
 //
 //    private fun renderHtml(html: String): String {
 //        val html = Jsoup.parse(html)
-//        Log.d(com.bqubique.quran_randomayah.view.TAG, "renderHtml: HERE")
-//        Log.d(com.bqubique.quran_randomayah.view.TAG, "renderHtml: ${html.select("p").text()}")
 //        return html.select("p").text()
 //    }
 //}
