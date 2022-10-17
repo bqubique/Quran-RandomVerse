@@ -66,7 +66,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.42"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
-
     implementation 'com.google.firebase:firebase-messaging:23.1.0'
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -81,7 +80,6 @@ dependencies {
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-
 
     //observeAsState
     implementation("androidx.compose.runtime:runtime-livedata:$compose_version")

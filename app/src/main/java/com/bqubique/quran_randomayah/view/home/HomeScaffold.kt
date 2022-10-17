@@ -12,6 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.wear.compose.foundation.CurvedTextStyle
@@ -30,7 +34,7 @@ import org.jsoup.Jsoup
 @Composable
 fun HomeScaffold(
     verseViewModel: VerseViewModel = hiltViewModel(),
-    hadithViewModel: HadithViewModel = hiltViewModel()
+    hadithViewModel: HadithViewModel = hiltViewModel(),
 ) {
     val isLoadingVerse = verseViewModel.loading.observeAsState()
     val arabicVerse = verseViewModel.arabicVerse.observeAsState()
@@ -49,7 +53,8 @@ fun HomeScaffold(
             timeText = {
                 TimeText(
                     startLinearContent = {
-                        Text(text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.collection + ":" + hadith.value?.hadithNumber)
+                        Text(text = if (pagerState.currentPage == 0) englishVerse.value!!.verse.verseKey else hadith.value?.collection?.replaceFirstChar { c -> c.uppercaseChar() } + ":\n" + hadith.value?.hadithNumber,
+                            style = TextStyle(color = DarkColors.primary, textAlign = TextAlign.Center))
                     },
                     startCurvedContent = {
                         curvedText(
@@ -106,7 +111,7 @@ fun HomeScaffold(
             }
         }
     } else {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().padding(10.dp), contentAlignment = Alignment.Center) {
             LoadingAnimation(isVerse = pagerState.currentPage == 0)
         }
     }

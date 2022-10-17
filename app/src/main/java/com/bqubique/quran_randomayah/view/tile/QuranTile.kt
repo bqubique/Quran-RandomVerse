@@ -56,6 +56,7 @@ class QuranTile : CoroutinesTileService() {
     override suspend fun tileRequest(requestParams: RequestBuilders.TileRequest): TileBuilders.Tile {
         return TileBuilders.Tile.Builder()
             .setResourcesVersion("1")
+            .setFreshnessIntervalMillis(12000000)
             .setTimeline(
                 TimelineBuilders.Timeline.Builder()
                     .addTimelineEntry(

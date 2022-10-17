@@ -25,7 +25,6 @@ class HadithViewModel @Inject constructor(
     }
 
     fun getHadith() {
-
         _loading.value = true
         viewModelScope.launch {
             _hadith.value = hadithApi.getRandomHadith().body()

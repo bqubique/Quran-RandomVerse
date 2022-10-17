@@ -18,7 +18,7 @@
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_twotone_menu_book_24_primary_color" />
+            android:resource="@drawable/ic_twotone_menu_book_24" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary" />
@@ -27,7 +27,7 @@
             android:name=".view.tile.QuranTile"
             android:description="@string/quran_tile"
             android:exported="true"
-            android:label="Quran Random Verse"
+            android:label="Noble Reminder Verse"
             android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
             <intent-filter>
                 <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
@@ -35,10 +35,25 @@
 
             <meta-data
                 android:name="androidx.wear.tiles.PREVIEW"
-                android:resource="@drawable/ic_launcher_foreground" />
-            <!--                android:resource="@drawable/tile_hello"-->
-
+                android:resource="@drawable/verse_tile_preview" />
         </service>
+
+
+        <service
+            android:name=".view.tile.HadithTile"
+            android:description="@string/hadith_tile"
+            android:exported="true"
+            android:label="Noble Reminder Hadith"
+            android:permission="com.google.android.wearable.permission.BIND_TILE_PROVIDER">
+            <intent-filter>
+                <action android:name="androidx.wear.tiles.action.BIND_TILE_PROVIDER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="androidx.wear.tiles.PREVIEW"
+                android:resource="@drawable/hadith_tile_preview" />
+        </service>
+
         <service
             android:name=".NotificationsService"
             android:exported="false">
@@ -64,5 +79,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
