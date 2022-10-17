@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.application'
-    id 'com.google.gms.google-services'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -13,7 +12,7 @@ android {
     buildToolsVersion "31.0.0"
 
     defaultConfig {
-        applicationId "com.bqubique.quran_randomayah"
+        applicationId "com.bqubique.noble_reminder"
         minSdk 26
         targetSdk 33
         versionCode 1
@@ -66,8 +65,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.42"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
-    implementation 'com.google.firebase:firebase-messaging:23.1.0'
-
+    
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
@@ -89,11 +87,6 @@ dependencies {
 
     //Glance Tiles
     implementation("androidx.glance:glance-wear-tiles:1.0.0-alpha05")
-
-    //Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.4')
-    implementation('com.google.firebase:firebase-analytics-ktx')
-    implementation('com.google.firebase:firebase-messaging-ktx')
 
     //http logging interceptor
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
